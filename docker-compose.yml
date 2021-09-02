@@ -1,0 +1,20 @@
+networks:
+  default:
+    driver: bridge
+
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: app/Dockerfile
+      args:
+        - TIMEZONE=${TIMEZONE}
+    tty: true
+    env_file:
+      - .envs/app.env
+      - .envs/php-fpm.env
+      - .envs/php-ini.env
+      - .envs/web.env
+    networks:
+      - default
